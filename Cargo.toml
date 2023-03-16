@@ -1,0 +1,18 @@
+[package]
+name = "wasmio-demo"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+# ^^^ Flexible concrete Error type built on std::error::Error
+wit-bindgen-rust = { git = "https://github.com/fermyon/wit-bindgen-backport" }
+# ^^^ A language binding generator for WebAssembly interface types
+wit-error-rs = { git = "https://github.com/danbugs/wit-error-rs", rev = "05362f1a4a3a9dc6a1de39195e06d2d5d6491a5e" }
+# ^^^ Convenience error-related trait implementations for types generated from a wit-bindgen import
+slight-http-handler-macro = { git = "https://github.com/deislabs/spiderlightning", tag = "v0.3.3" }
+# ^^^ Macro for creating http request handlers when using SpiderLightning's http interface
+
+[workspace]
