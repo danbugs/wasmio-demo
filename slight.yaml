@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wasm-slight
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wasm-slight
+  template:
+    metadata:
+      labels:
+        app: wasm-slight
+    spec:
+      runtimeClassName: wasmtime-slight-v1
+      containers:
+        - name: wasmio-demo
+          image: danstaken/wasmio2023-demo:latest
+          imagePullPolicy: Always
+          env:
+            - name: AZAPPCONFIG_KEYSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: wasmio-demo
+                  key: AZAPPCONFIG_KEYSECRET
+            - name: AZAPPCONFIG_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: wasmio-demo
+                  key: AZAPPCONFIG_ENDPOINT
+            - name: AZAPPCONFIG_KEYID
+              valueFrom:
+                secretKeyRef:
+                  name: wasmio-demo
+                  key: AZAPPCONFIG_KEYID                              
+          command: ["/"]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wasm-slight
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    app: wasm-slight

@@ -14,6 +14,7 @@ fn main() -> Result<()> {
     let ping_pong_sub_tok = my_sub.subscribe("ping")?;
 
     let my_kv = Keyvalue::open("my-container")?;
+    println!(">>> Listening...");
 
     loop {
         let msg = my_sub.receive(&ping_pong_sub_tok)?;
