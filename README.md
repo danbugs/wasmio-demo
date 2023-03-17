@@ -11,4 +11,4 @@ make run
 
 ## Video demo
     
-[![Video demo](https://i.imgur.com/AyoXGVJ.png)](https://streamable.com/sz6fg7)
+[![Video demo](https://i.imgur.com/AyoXGVJ.png)](https://streamable.com/tvzum1)
